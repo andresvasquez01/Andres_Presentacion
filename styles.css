@@ -1,0 +1,243 @@
+/* Estilos generales */
+body {
+    font-family: 'Inter', sans-serif; /* Cambiar la fuente a Inter o una similar */
+    margin: 0;
+    padding: 0;
+    background-color: #0a192f; /* Fondo oscuro similar al de Brittany Chiang */
+    color: #ccd6f6; /* Color de texto principal */
+    line-height: 1.6;
+}
+
+/* Navegación flotante */
+#navegacion {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(10, 25, 47, 0.9); /* Fondo oscuro con transparencia */
+    padding: 10px 20px;
+    border-radius: 25px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    display: flex;
+    gap: 15px;
+}
+
+#navegacion a {
+    text-decoration: none;
+    color: #ccd6f6; /* Color de texto claro */
+    font-weight: bold;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+#navegacion a:hover {
+    color: #64ffda;
+    transform: translateY(-2px); /* Efecto de levantar ligeramente */
+}
+
+#navegacion a.active {
+    color: #64ffda; /* Color de acento para el enlace activo */
+    border-bottom: 2px solid #64ffda;
+}
+
+/* Transiciones para botones */
+.btn {
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #52d1b2;
+    transform: translateY(-2px); /* Efecto de levantar ligeramente */
+}
+
+/* Header */
+header {
+    background-color: #0a192f; /* Fondo oscuro */
+    color: #ccd6f6;
+    padding: 150px 0; /* Más espacio en el header */
+    text-align: center;
+    position: relative;
+}
+
+.contenido-inicio h1 {
+    font-size: 4rem; /* Tamaño de fuente más grande */
+    margin: 0;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+.contenido-inicio p {
+    font-size: 1.5rem; /* Tamaño de fuente más grande */
+    margin: 10px 0 20px;
+    color: #8892b0; /* Color de texto secundario */
+}
+
+.contenido-inicio .btn {
+    background-color: #64ffda; /* Color de acento */
+    color: #0a192f; /* Texto oscuro sobre fondo claro */
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.contenido-inicio .btn:hover {
+    background-color: #52d1b2; /* Color de acento más oscuro al pasar el mouse */
+}
+
+/* Secciones */
+section {
+    background-color: #112240; /* Fondo oscuro para las secciones */
+    margin: 40px 20px;
+    padding: 40px; /* Más espacio interno */
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+section h2 {
+    color: #64ffda; /* Color de acento para los títulos */
+    font-size: 2.5rem; /* Tamaño de fuente más grande */
+    margin-bottom: 20px;
+}
+
+/* Herramientas */
+.herramientas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 20px;
+    justify-items: center;
+    text-align: center;
+}
+
+.herramienta {
+    background-color: #233554; /* Fondo oscuro para las herramientas */
+    padding: 20px;
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.herramienta:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(100, 255, 218, 0.3); /* Sombra con color de acento */
+}
+
+.herramienta i {
+    font-size: 2.5rem;
+    color: #64ffda; /* Color de acento para los íconos */
+}
+
+.herramienta p {
+    margin-top: 10px;
+    color: #ccd6f6; /* Color de texto claro */
+}
+
+/* Habilidades */
+#habilidades {
+    background-color: #112240; /* Fondo oscuro */
+    padding: 40px 20px;
+    border-radius: 10px;
+    margin: 40px 20px;
+}
+
+.habilidades-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.habilidad span {
+    color: #64ffda; /* Color de acento para los títulos de habilidades */
+    font-weight: bold;
+}
+
+.barra {
+    width: 100%;
+    background-color: #233554; /* Fondo de la barra */
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progreso {
+    height: 10px;
+    background-color: #64ffda; /* Color de acento para la barra de progreso */
+    width: 0; /* Inicialmente en 0 */
+    transition: width 1s ease;
+}
+
+/* Proyectos */
+.proyectos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 100px; /* Aumentamos el espacio entre proyectos */
+}
+
+.proyecto {
+    background-color: #233554; /* Fondo oscuro para los proyectos */
+    padding: 20px; /* Espacio interno */
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 40px; /* Espacio debajo de cada proyecto */
+}
+
+.proyecto:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(100, 255, 218, 0.3); /* Sombra con color de acento */
+}
+
+.proyecto h3 {
+    color: #64ffda; /* Color de acento para los títulos de proyectos */
+}
+
+.proyecto p {
+    color: #ccd6f6; /* Color de texto claro */
+}
+
+/* Footer */
+footer {
+    background-color: #0a192f; /* Fondo oscuro */
+    color: #ccd6f6;
+    text-align: center;
+    padding: 20px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.redes-sociales {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.redes-sociales a {
+    color: #64ffda; /* Color de acento para los íconos */
+    font-size: 1.5rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.redes-sociales a:hover {
+    transform: rotate(15deg) scale(1.2);
+    color: #52d1b2; /* Color de acento más oscuro al pasar el mouse */
+}
+
+@media (max-width: 768px) {
+    .contenido-inicio h1 {
+        font-size: 3rem;
+    }
+
+    .contenido-inicio p {
+        font-size: 1.2rem;
+    }
+
+    #navegacion {
+        padding: 10px;
+        gap: 10px;
+    }
+
+    section {
+        padding: 20px;
+    }
+}
