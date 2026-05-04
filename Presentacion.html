@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Andrés Vásquez — Inetum</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0D1B40;
+    --blue: #1565C0;
+    --cyan: #00B0D7;
+    --white: #FFFFFF;
+    --light-bg: #F0F6FB;
+    --gray: #64748B;
+    --card-shadow: 0 4px 24px rgba(13,27,64,0.10);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 100%;
+    height: 100%;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #1a1a2e;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    gap: 8px;
+    min-height: 100vh;
+  }
+
+  h1, h2, h3 { font-family: 'Syne', sans-serif; }
+
+  /* ── CONTROLS ── */
+  .controls {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    background: rgba(255,255,255,0.07);
+    padding: 10px 24px;
+    border-radius: 50px;
+    color: #fff;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .controls span { opacity: .6; }
+  .btn-nav {
+    background: var(--cyan);
+    color: var(--navy);
+    border: none;
+    border-radius: 50px;
+    padding: 8px 24px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 14px;
+    transition: opacity .2s;
+  }
+  .btn-nav:hover { opacity: .85; }
+  #slide-counter { font-weight: 600; min-width: 60px; text-align: center; }
+
+  /* ── SLIDE WRAPPER ── */
+  .slides-container {
+    width: 100%;
+    max-width: 1280px;
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+
+  .slide {
+    display: none;
+    width: 100%;
+    aspect-ratio: 16/9;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+    animation: fadeIn .4s ease;
+  }
+  .slide.active { display: flex; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ════════════════════════════════════
+     SLIDE 1 — PORTADA
+  ════════════════════════════════════ */
+  #s1 {
+    background: var(--navy);
+    flex-direction: row;
+    position: relative;
+  }
+  .s1-accent {
+    width: 7px;
+    background: var(--cyan);
+    flex-shrink: 0;
+  }
+  .s1-content {
+    flex: 1;
+    padding: 7% 8%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 16px;
+    position: relative;
+    z-index: 2;
+  }
+  .s1-tag {
+    font-size: clamp(11px, 1.4vw, 15px);
+    color: var(--cyan);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .s1-name {
+    font-size: clamp(26px, 4.5vw, 56px);
+    color: var(--white);
+    line-height: 1.1;
+    font-weight: 800;
+  }
+  .s1-divider {
+    width: 60px;
+    height: 3px;
+    background: var(--cyan);
+  }
+  .s1-role {
+    font-size: clamp(13px, 1.8vw, 20px);
+    color: var(--cyan);
+    font-weight: 600;
+  }
+  .s1-subtitle {
+    font-size: clamp(11px, 1.3vw, 15px);
+    color: #CADCFC;
+    font-style: italic;
+    margin-top: 4px;
+  }
+  .s1-circles {
+    position: absolute;
+    right: 0; top: 0;
+    width: 50%;
+    height: 100%;
+    pointer-events: none;
+  }
+  .s1-circles .c1 {
+    position: absolute;
+    width: 55%; aspect-ratio: 1;
+    border-radius: 50%;
+    background: rgba(21,101,192,0.35);
+    top: -20%; right: -10%;
+  }
+  .s1-circles .c2 {
+    position: absolute;
+    width: 38%; aspect-ratio: 1;
+    border-radius: 50%;
+    background: rgba(0,176,215,0.18);
+    bottom: -10%; right: 15%;
+  }
+  .s1-footer {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: var(--blue);
+    padding: 8px 28px;
+    font-size: clamp(10px, 1.1vw, 13px);
+    color: var(--white);
+    text-align: right;
+  }
+
+  /* ════════════════════════════════════
+     SLIDE HEADER (slides 2-4)
+  ════════════════════════════════════ */
+  .slide-inner {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+  }
+  .slide-header {
+    background: var(--navy);
+    display: flex;
+    align-items: center;
+    padding: 0 36px;
+    height: 18%;
+    flex-shrink: 0;
+    position: relative;
+  }
+  .slide-header::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 6px;
+    background: var(--cyan);
+  }
+  .slide-header h2 {
+    color: var(--white);
+    font-size: clamp(18px, 3vw, 34px);
+    font-weight: 800;
+  }
+  .slide-body {
+    flex: 1;
+    background: var(--light-bg);
+    padding: 4% 5%;
+    display: flex;
+    gap: 3%;
+  }
+
+  /* ════════════════════════════════════
+     CARDS
+  ════════════════════════════════════ */
+  .card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .card-header {
+    padding: 10px 16px;
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(11px, 1.3vw, 15px);
+    font-weight: 700;
+    color: #fff;
+  }
+  .card-header.cyan { background: var(--cyan); }
+  .card-header.blue { background: var(--blue); }
+  .card-header.navy { background: var(--navy); color: var(--cyan); }
+  .card-body {
+    padding: 12px 16px;
+    font-size: clamp(10px, 1.15vw, 14px);
+    color: var(--navy);
+    line-height: 1.55;
+    flex: 1;
+  }
+  .card-body strong { display: block; margin-bottom: 2px; }
+  .card-body p { color: var(--gray); }
+  .card-body .entry { margin-bottom: 10px; }
+
+  /* ════════════════════════════════════
+     SLIDE 2
+  ════════════════════════════════════ */
+  #s2 .slide-body { flex-direction: row; }
+  #s2 .col { flex: 1; display: flex; flex-direction: column; }
+  #s2 .card { flex: 1; }
+
+  /* ════════════════════════════════════
+     SLIDE 3
+  ════════════════════════════════════ */
+  #s3 .slide-body { flex-direction: column; gap: 3%; }
+  #s3 .top-row { display: flex; gap: 3%; flex: 1; }
+  #s3 .top-row .card { flex: 1; }
+  #s3 .exp-card { flex-shrink: 0; }
+
+  .skill-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 6px;
+  }
+  .pill {
+    background: rgba(0,176,215,0.15);
+    color: var(--blue);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: clamp(9px, 1vw, 13px);
+    font-weight: 600;
+  }
+
+  /* ════════════════════════════════════
+     SLIDE 4
+  ════════════════════════════════════ */
+  #s4 .slide-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+  #s4 .card { border-radius: 8px; }
+
+  /* ════════════════════════════════════
+     SLIDE 5 — CIERRE
+  ════════════════════════════════════ */
+  #s5 {
+    background: var(--navy);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+    position: relative;
+  }
+  .s5-c1 {
+    position: absolute;
+    width: 35%; aspect-ratio: 1;
+    border-radius: 50%;
+    background: rgba(21,101,192,0.3);
+    top: -15%; left: -8%;
+  }
+  .s5-c2 {
+    position: absolute;
+    width: 28%; aspect-ratio: 1;
+    border-radius: 50%;
+    background: rgba(0,176,215,0.2);
+    bottom: -12%; right: -4%;
+  }
+  #s5 h1 {
+    font-size: clamp(32px, 6vw, 68px);
+    color: var(--white);
+    font-weight: 800;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+  #s5 .s5-line {
+    width: 80px;
+    height: 4px;
+    background: var(--cyan);
+    position: relative;
+    z-index: 2;
+  }
+  #s5 .s5-sub {
+    font-size: clamp(13px, 1.8vw, 20px);
+    color: #CADCFC;
+    font-style: italic;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    line-height: 1.6;
+  }
+  #s5 .s5-name {
+    font-size: clamp(10px, 1.2vw, 14px);
+    color: var(--cyan);
+    position: relative;
+    z-index: 2;
+    letter-spacing: 1px;
+  }
+</style>
+</head>
+<body>
+
+<div class="controls">
+  <button class="btn-nav" onclick="changeSlide(-1)">&#9664; Anterior</button>
+  <span id="slide-counter">1 / 5</span>
+  <button class="btn-nav" onclick="changeSlide(1)">Siguiente &#9654;</button>
+</div>
+
+<div class="slides-container">
+
+  <!-- SLIDE 1 — PORTADA -->
+  <div class="slide active" id="s1">
+    <div class="s1-accent"></div>
+    <div class="s1-content">
+      <div class="s1-tag">Presentación Personal</div>
+      <h1 class="s1-name">Andrés Fernando<br>Vásquez Acosta</h1>
+      <div class="s1-divider"></div>
+      <div class="s1-role">Ingeniero en Ciencias de la Computación e IA</div>
+      <div class="s1-subtitle">Mi presentación para el equipo de Inetum</div>
+    </div>
+    <div class="s1-circles">
+      <div class="c1"></div>
+      <div class="c2"></div>
+    </div>
+    <div class="s1-footer">Primer día en Inetum &bull; 2026</div>
+  </div>
+
+  <!-- SLIDE 2 — ¿QUIÉN SOY? -->
+  <div class="slide" id="s2">
+    <div class="slide-inner">
+      <div class="slide-header">
+        <h2>¿Quién soy?</h2>
+      </div>
+      <div class="slide-body">
+
+        <div class="col">
+          <div class="card">
+            <div class="card-header cyan">Personal</div>
+            <div class="card-body">
+              <div class="entry">
+                <strong>Guasca, Cundinamarca</strong>
+                <p>Vivo con mi mamá y mi hermana mayor</p>
+              </div>
+              <div class="entry">
+                <strong>Apasionado por la tecnología</strong>
+                <p>Me informo semanalmente sobre el mundo tech, especialmente hardware y nuevas tendencias</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card">
+            <div class="card-header blue">Intereses y Gustos</div>
+            <div class="card-body">
+              <div class="entry">
+                <strong>Hardware y Tecnología</strong>
+                <p>Sigo de cerca lanzamientos, reviews y tendencias del mundo tech a nivel global</p>
+              </div>
+              <div class="entry">
+                <strong>Aprendizaje continuo</strong>
+                <p>Me mantengo actualizado con podcasts, noticias y comunidades de tecnología</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 3 — FORMACIÓN & EXPERIENCIA -->
+  <div class="slide" id="s3">
+    <div class="slide-inner">
+      <div class="slide-header">
+        <h2>Formación &amp; Experiencia</h2>
+      </div>
+      <div class="slide-body">
+        <div class="top-row">
+
+          <div class="card">
+            <div class="card-header cyan">Formación Académica</div>
+            <div class="card-body">
+              <div class="entry">
+                <strong>Ciencias de la Computación e IA</strong>
+                <p>Universidad Sergio Arboleda</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header navy">Stack Tecnológico</div>
+            <div class="card-body">
+              <div class="skill-pills">
+                <span class="pill">Python</span>
+                <span class="pill">ACL Analytics</span>
+                <span class="pill">Looker Studio</span>
+                <span class="pill">Automatización de Procesos</span>
+                <span class="pill">Analítica de Datos</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="card exp-card">
+          <div class="card-header blue">Experiencia Profesional</div>
+          <div class="card-body">
+            <div class="entry">
+              <strong>Federación Nacional de Cafeteros de Colombia — Analista de Datos y Automatización</strong>
+              <p>Análisis de datos e implementación de automatización de procesos para el Área de Auditoría Interna.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 4 — EXPECTATIVAS -->
+  <div class="slide" id="s4">
+    <div class="slide-inner">
+      <div class="slide-header">
+        <h2>Expectativas en Inetum</h2>
+      </div>
+      <div class="slide-body">
+
+        <div class="card">
+          <div class="card-header cyan">Crecer profesionalmente</div>
+          <div class="card-body">
+            <p>Adquirir la experiencia necesaria para consolidarme como profesional en el área de datos e ingenieria.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header blue">Trabajo en equipo</div>
+          <div class="card-body">
+            <p>Colaborar con equipos multidisciplinarios y aprender de compañeros con distintos perfiles.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header blue">Aprendizaje continuo</div>
+          <div class="card-body">
+            <p>Explorar nuevas tecnologías y metodologías para potenciar mis habilidades técnicas.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header cyan">Generar valor</div>
+          <div class="card-body">
+            <p>Aportar mis conocimientos en análisis de datos y automatización en proyectos de impacto.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 5 — CIERRE -->
+  <div class="slide" id="s5">
+    <div class="s5-c1"></div>
+    <div class="s5-c2"></div>
+    <h1>¡Muchas gracias!</h1>
+    <div class="s5-line"></div>
+    <div class="s5-sub">Listo para empezar esta nueva etapa<br>junto al equipo de Inetum</div>
+    <div class="s5-name">Andrés Fernando Vásquez Acosta &bull; Ingeniero en Ciencias de la Computación e IA</div>
+  </div>
+
+</div>
+
+<script>
+  let current = 0;
+  const slides = document.querySelectorAll('.slide');
+  const counter = document.getElementById('slide-counter');
+
+  function changeSlide(dir) {
+    slides[current].classList.remove('active');
+    current = (current + dir + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    counter.textContent = `${current + 1} / ${slides.length}`;
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') changeSlide(1);
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   changeSlide(-1);
+  });
+</script>
+</body>
+</html>
